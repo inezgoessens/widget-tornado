@@ -1,4 +1,31 @@
 <html>
+<head>
+    <title>WEEKDAY</title> 
+    <style>
+#lbl {
+    font-family: monospace;
+    font-size: xx-large;
+    color: #626262;
+    padding: 5px;
+    border: 1px solid #ececec;
+    text-align: center;
+    line-height: 1.5;
+    height:85%
+
+
+}
+#date{
+    font-size:large;
+}
+body{
+    background-color: aliceblue;
+}
+    </style>
+</head>
+<body>
+    <div id="lbl"></div>
+</body>
+
 <script>
 	currentDate = new Date();
 	startDate = new Date(currentDate.getFullYear(), 0, 1);
@@ -8,6 +35,6 @@
 	var weekNumber = Math.ceil(days / 7);
 
 	// Display the calculated result	
-	document.write("Week number is : " + weekNumber);
+	document.write(weekNumber);
 </script>
 </html>
