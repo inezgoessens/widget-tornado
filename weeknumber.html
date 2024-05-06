@@ -25,6 +25,31 @@ body{
 <body>
 <div id="lbl">
 <script>
+    // Function to get the ISO week number
+    function getISOWeekNumber(date) {
+        var year = date.getFullYear();
+        var month = date.getMonth();
+        var day = date.getDate();
+        var startOfYear = new Date(year, 0, 1);
+        var startOfWeek = new Date(year, 0, 1);
+        var weekNumber = Math.ceil((((date - startOfYear) / 86400000) + startOfYear.getDay() + 1) / 7);
+        
+        // Handle cases where the week number is 0 or 53
+        if (weekNumber === 0) {
+            weekNumber = getISOWeekNumber(new Date(year - 1, 11, 31));
+        } else if (weekNumber === 53 && new Date(year, 0, 1).getDay() !== 4) {
+            weekNumber = 1;
+        }
+        return weekNumber;
+    }
+    
+    var currentDate = new Date();
+    var weekNumber = getISOWeekNumber(currentDate);
+    
+    // Display the calculated result    
+    document.write("WEEK " + weekNumber);
+</script>
+<! –– <script>
 	currentDate = new Date();
 	startDate = new Date(currentDate.getFullYear(), 0, 1);
 	var days = Math.floor((currentDate - startDate) /
@@ -34,7 +59,7 @@ body{
 
 	// Display the calculated result	
 	document.write("WEEK " + weekNumber);
-</script>
+</script> ––>
 </div>
 </body>
 </html>
