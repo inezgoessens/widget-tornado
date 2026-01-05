@@ -1,0 +1,151 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monthly PNG Calendar Widget</title>
+  <style>
+    /* Reset and widget container styling */
+    .calendar-widget {
+      max-width: 600px;          /* Adjust as needed */
+      margin: 1rem auto;
+      aspect-ratio: 16 / 9;      /* Optional, keeps a nice box; remove if not desired */
+      position: relative;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #f8f8f8;
+    }
+
+    /* Stack all month images in the same place */
+    .calendar-widget .month {
+      position: absolute;
+      inset: 0;                  /* top/right/bottom/left: 0 */
+      display: none;             /* hidden by default */
+      align-items: center;
+      justify-content: center;
+      background: #fff;          /* in case your PNGs are smaller/transparent */
+    }
+
+    /* Show only the active month */
+    .calendar-widget .month.active {
+      display: flex;
+    }
+
+    /* Make images scale nicely within the box */
+    .calendar-widget .month img {
+      max-width: 100%;
+      max-height: 100%;
+      height: auto;
+      width: auto;
+      object-fit: contain;       /* keeps aspect ratio */
+    }
+
+    /* Optional label overlay (current month name) */
+    .calendar-widget .label {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      padding: 6px 10px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      border-radius: 6px;
+      font: 500 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    }
+
+    /* Fallback note if JS is disabled */
+    .no-js-note {
+      text-align: center;
+      font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    /* Hide the note once JS runs */
+    .js-enabled .no-js-note { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Calendar widget -->
+  <div id="calendarWidget" class="calendar-widget" aria-label="PNG calendar for current month">
+    <!-- January (0) -->
+    <div class="month" data-month="0" aria-hidden="true">
+      <img src="./images/jan.png" alt="January"uary (1) -->
+    <div class="month" data-month="1" aria-hidden="true">
+      ./images/feb.png
+    </div>
+    <!-- March (2) -->
+    <div class="month" data-month="2" aria-hidden="true">
+      <img src="./images/mar.png" alt="!-- April (3) -->
+    <div class="month" data-month="3" aria-hidden="true">
+      ./images/apr.png
+    </div>
+    <!-- May (4) -->
+    <div class="month" data-month="4" aria-hidden="true">
+      ./images/may.png
+    </div>
+    <!-- June (5) -->
+    <div class="month" data-month="5" aria-hidden="true">
+      ./images/jun.png
+    </div>
+    <!-- July (6) -->
+    <div class="month" data-month="6" aria-hidden="true">
+      </images/jul.png
+    </div>
+    <!-- August (7) -->
+    <div class="month" data-month="7" aria-hidden="true">
+      ./images/aug.png
+    </div>
+    <!-- September (8) -->
+    <div class="month" data-month="8" aria-hidden="true">
+      <img src="./images/sep.png" alt="Septemberer (9) -->
+    <div class="month" data-month="9" aria-hidden="true">
+      </images/oct.png
+    </div>
+    <!-- November (10) -->
+    <div class="month" data-month="10" aria-hidden="true">
+      ./images/nov.png
+    </div>
+    <!-- December (11) -->
+    <div class="month" data-month="11" aria-hidden="true">
+      ./images/dec.png
+    </div>
+
+    <!-- Optional month label overlay populated by JS -->
+    <div class="label" aria-live="polite"></div>
+  </div>
+
+  <p class="no-js-note">If you can see multiple images, please enable JavaScript to show the correct month automatically.</p>
+
+  <script>
+    (function () {
+      // Mark page as JS-enabled (hides the fallback note)
+      document.documentElement.classList.add('js-enabled');
+
+      const widget = document.getElementById('calendarWidget');
+      const months = widget.querySelectorAll('.month');
+      const labelEl = widget.querySelector('.label');
+
+      // Get current month (0 = Jan … 11 = Dec)
+      const now = new Date();
+      const currentMonthIndex = now.getMonth();
+
+      // Optional: localized month name (uses browser locale)
+      const monthName = new Intl.DateTimeFormat(undefined, { month: 'long' }).format(now);
+
+      // Show only the current month
+      months.forEach((m) => {
+        const isActive = Number(m.dataset.month) === currentMonthIndex;
+        m.classList.toggle('active', isActive);
+        m.setAttribute('aria-hidden', String(!isActive));
+      });
+
+      // Update label
+      if (labelEl) {
+        labelEl.textContent = monthName;
+      }
+    })();
+  </script>
+</body>
+</html>
