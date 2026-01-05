@@ -6,10 +6,14 @@
   <title>Monthly PNG Calendar Widget</title>
   <style>
     /* Reset and widget container styling */
+    body {
+      margin: 0;
+      padding: 0;
+    }
+    
     .calendar-widget {
-      max-width: 600px;          /* Adjust as needed */
-      margin: 1rem auto;
-      aspect-ratio: 16 / 9;      /* Optional, keeps a nice box; remove if not desired */
+      width: 100%;
+      height: 100vh;             /* Full viewport height */
       position: relative;
       overflow: hidden;
     }
@@ -28,13 +32,11 @@
       display: flex;
     }
 
-    /* Make images scale nicely within the box */
+    /* Make images fill the entire container */
     .calendar-widget .month img {
-      max-width: 100%;
-      max-height: 100%;
-      height: auto;
-      width: auto;
-      object-fit: contain;       /* keeps aspect ratio */
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         /* fills the space, may crop if aspect ratios don't match */
     }
 
     /* Fallback note if JS is disabled */
