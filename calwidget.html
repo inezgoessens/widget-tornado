@@ -6,15 +6,24 @@
   <title>Monthly PNG Calendar Widget</title>
   <style>
     /* Reset and widget container styling */
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
     
     .calendar-widget {
       width: 100%;
-      height: 100vh;             /* Full viewport height */
-      position: relative;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
       overflow: hidden;
     }
 
