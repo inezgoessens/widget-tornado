@@ -11,10 +11,7 @@
       margin: 1rem auto;
       aspect-ratio: 16 / 9;      /* Optional, keeps a nice box; remove if not desired */
       position: relative;
-      border: 1px solid #ddd;
-      border-radius: 8px;
       overflow: hidden;
-      background: #f8f8f8;
     }
 
     /* Stack all month images in the same place */
@@ -24,7 +21,6 @@
       display: none;             /* hidden by default */
       align-items: center;
       justify-content: center;
-      background: #fff;          /* in case your PNGs are smaller/transparent */
     }
 
     /* Show only the active month */
@@ -39,18 +35,6 @@
       height: auto;
       width: auto;
       object-fit: contain;       /* keeps aspect ratio */
-    }
-
-    /* Optional label overlay (current month name) */
-    .calendar-widget .label {
-      position: absolute;
-      left: 12px;
-      bottom: 12px;
-      padding: 6px 10px;
-      background: rgba(0, 0, 0, 0.6);
-      color: #fff;
-      border-radius: 6px;
-      font: 500 14px/1.2 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
     }
 
     /* Fallback note if JS is disabled */
@@ -116,9 +100,6 @@
     <div class="month" data-month="11" aria-hidden="true">
       <img src="images/DEC.png" alt="December" />
     </div>
-
-    <!-- Optional month label overlay populated by JS -->
-    <div class="label" aria-live="polite"></div>
   </div>
 
   <p class="no-js-note">If you can see multiple images, please enable JavaScript to show the correct month automatically.</p>
@@ -130,14 +111,10 @@
 
       const widget = document.getElementById('calendarWidget');
       const months = widget.querySelectorAll('.month');
-      const labelEl = widget.querySelector('.label');
 
       // Get current month (0 = Jan … 11 = Dec)
       const now = new Date();
       const currentMonthIndex = now.getMonth();
-
-      // Optional: localized month name (uses browser locale)
-      const monthName = new Intl.DateTimeFormat(undefined, { month: 'long' }).format(now);
 
       // Show only the current month
       months.forEach((m) => {
@@ -145,11 +122,6 @@
         m.classList.toggle('active', isActive);
         m.setAttribute('aria-hidden', String(!isActive));
       });
-
-      // Update label
-      if (labelEl) {
-        labelEl.textContent = monthName;
-      }
     })();
   </script>
 </body>
