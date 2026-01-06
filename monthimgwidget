@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monthly LOTR img</title>
+  <style>
+    /* Reset and widget container styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+    
+    .calendar-widget {
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      overflow: hidden;
+    }
+
+    /* Stack all month images in the same place */
+    .calendar-widget .month {
+      position: absolute;
+      inset: 0;                  /* top/right/bottom/left: 0 */
+      display: none;             /* hidden by default */
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Show only the active month */
+    .calendar-widget .month.active {
+      display: flex;
+    }
+
+    /* Make images fill the entire container */
+    .calendar-widget .month img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;         /* fills the space, may crop if aspect ratios don't match */
+    }
+
+    /* Fallback note if JS is disabled */
+    .no-js-note {
+      text-align: center;
+      font: 14px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    /* Hide the note once JS runs */
+    .js-enabled .no-js-note { display: none; }
+  </style>
+</head>
+<body>
+  <!-- Calendar widget -->
+  <div id="calendarWidget" class="calendar-widget" aria-label="LOTR img for current month">
+    <!-- January (0) -->
+    <div class="month" data-month="0" aria-hidden="true">
+      <img src="images/JAN_LOTR.jpg" alt="January" />
+    </div>
+    <!-- February (1) -->
+    <div class="month" data-month="1" aria-hidden="true">
+      <img src="images/FEB_LOTR.jpg" alt="February" />
+    </div>
+    <!-- March (2) -->
+    <div class="month" data-month="2" aria-hidden="true">
+      <img src="images/MAR_LOTR.jpg" alt="March" />
+    </div>
+    <!-- April (3) -->
+    <div class="month" data-month="3" aria-hidden="true">
+      <img src="images/APR_LOTR.jpg" alt="April" />
+    </div>
+    <!-- May (4) -->
+    <div class="month" data-month="4" aria-hidden="true">
+      <img src="images/MAY_LOTR.jpg" alt="May" />
+    </div>
+    <!-- June (5) -->
+    <div class="month" data-month="5" aria-hidden="true">
+      <img src="images/JUN_LOTR.jpg" alt="June" />
+    </div>
+    <!-- July (6) -->
+    <div class="month" data-month="6" aria-hidden="true">
+      <img src="images/JUL_LOTR.jpg" alt="July" />
+    </div>
+    <!-- August (7) -->
+    <div class="month" data-month="7" aria-hidden="true">
+      <img src="images/AUG_LOTR.jpg" alt="August" />
+    </div>
+    <!-- September (8) -->
+    <div class="month" data-month="8" aria-hidden="true">
+      <img src="images/SEPT_LOTR.jpg" alt="September" />
+    </div>
+    <!-- October (9) -->
+    <div class="month" data-month="9" aria-hidden="true">
+      <img src="images/OCT_LOTR.jpg" alt="October" />
+    </div>
+    <!-- November (10) -->
+    <div class="month" data-month="10" aria-hidden="true">
+      <img src="images/NOV_LOTR.jpg" alt="November" />
+    </div>
+    <!-- December (11) -->
+    <div class="month" data-month="11" aria-hidden="true">
+      <img src="images/DEC_LOTR.jpg" alt="December" />
+    </div>
+  </div>
+
+  <p class="no-js-note">If you can see multiple images, please enable JavaScript to show the correct month automatically.</p>
+
+  <script>
+    (function () {
+      // Mark page as JS-enabled (hides the fallback note)
+      document.documentElement.classList.add('js-enabled');
+
+      const widget = document.getElementById('calendarWidget');
+      const months = widget.querySelectorAll('.month');
+
+      // Get current month (0 = Jan … 11 = Dec)
+      const now = new Date();
+      const currentMonthIndex = now.getMonth();
+
+      // Show only the current month
+      months.forEach((m) => {
+        const isActive = Number(m.dataset.month) === currentMonthIndex;
+        m.classList.toggle('active', isActive);
+        m.setAttribute('aria-hidden', String(!isActive));
+      });
+    })();
+  </script>
+</body>
+</html>
